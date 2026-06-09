@@ -64,7 +64,7 @@ export default function HeroSection() {
           <motion.div variants={textVariants} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
             <span className="gold-line" />
             <span className="font-heading" style={{ fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)' }}>
-              Est. 2020 · Mumbai & Chennai
+              Est. 2026 · Mumbai
             </span>
           </motion.div>
 
