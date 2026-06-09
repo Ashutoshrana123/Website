@@ -34,9 +34,10 @@ export default function Footer() {
         <div style={{ flex: '1 1 400px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
             <div style={{ width: '2rem', height: '2rem', border: '1px solid var(--gold)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span className="font-heading" style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.75rem' }}>P</span>
+              {/* <span className="font-heading" style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.75rem' }}>P</span> */}
+              <span className="font-heading" style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.75rem' }}>GF</span>
             </div>
-            <span className="font-heading" style={{ color: '#fff', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Prestige PR</span>
+            <span className="font-heading" style={{ color: '#fff', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Golden Focus</span>
           </div>
           <p className="font-body" style={{ fontSize: '0.875rem', lineHeight: 1.6, marginBottom: '1.5rem', maxWidth: '24rem', color: 'var(--white-dim)' }}>
             A results-driven Public Relations agency specializing in celebrity management, brand visibility, media placements, and reputation building.
@@ -103,7 +104,7 @@ export default function Footer() {
         borderTop: '1px solid var(--border)' 
       }}>
         <p className="font-body" style={{ fontSize: '0.75rem', color: 'var(--white-dim)', margin: 0 }}>
-          © {new Date().getFullYear()} Prestige PR Agency. All rights reserved.
+          © {new Date().getFullYear()} Golden Focus Agency. All rights reserved.
         </p>
         <p className="font-body" style={{ fontSize: '0.75rem', color: 'var(--white-dim)', margin: 0 }}>
           Privacy Policy · Terms of Service

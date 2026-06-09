@@ -18,7 +18,7 @@ const mediaItems = [
 
 const press = [
   { pub: 'Times of India', title: 'Top PR Agency in Mumbai 2025', date: 'Jan 2025' },
-  { pub: 'Hindu Business Line', title: 'Celebrity PR Trends: Prestige PR featured', date: 'Mar 2025' },
+  { pub: 'Hindu Business Line', title: 'Celebrity PR Trends: Golden Focus featured', date: 'Mar 2025' },
   { pub: 'Vogue India', title: 'The Faces Behind Fashion PR', date: 'Feb 2025' },
   { pub: 'Economic Times', title: 'PR Agencies Redefining Brand Stories', date: 'Apr 2025' },
   { pub: 'Filmfare', title: '20 Most Influential PR Pros in Bollywood', date: 'Dec 2024' },

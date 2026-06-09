@@ -6,9 +6,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 
 export const metadata: Metadata = {
-  title: "PRESTIGE PR — Elevating Brands, Building Influence",
+  title: "GOLDEN FOCUS — Elevating Brands, Building Influence",
   description: "A results-driven Public Relations agency specializing in celebrity management, brand visibility, media placements, and reputation building.",
   keywords: "PR agency, public relations, celebrity management, brand visibility, event management, media placements",
+  // Remove icons from metadata - let Next.js auto-detect
 };
 
 export default function RootLayout({

@@ -10,7 +10,7 @@ const testimonials = [
     initial: 'P',
   },
   {
-    quote: 'They transformed our brand image and visibility within months. Our media presence has grown 10x since partnering with Prestige PR.',
+    quote: 'They transformed our brand image and visibility within months. Our media presence has grown 10x since partnering with Golden Focus.',
     author: 'Arjun Kapoor',
     role: 'Actor & Brand Ambassador',
     initial: 'A',
@@ -22,7 +22,7 @@ const testimonials = [
     initial: 'M',
   },
   {
-    quote: 'Trusted, talented, and truly invested in our success. Prestige PR is not just an agency — they are partners.',
+    quote: 'Trusted, talented, and truly invested in our success. Golden Focus is not just an agency — they are partners.',
     author: 'Vikram Rajan',
     role: 'Managing Director, RajCorp',
     initial: 'V',

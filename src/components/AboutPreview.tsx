@@ -40,7 +40,7 @@ export default function AboutPreview() {
       <div style={{ marginBottom: '4rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
           <span className="gold-line" />
-          <span className="font-heading" style={{ fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)' }}>About Prestige PR</span>
+          <span className="font-heading" style={{ fontSize: '0.75rem', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--gold)' }}>About Golden Focus</span>
         </div>
         <motion.div 
           initial={{ width: 0 }} whileInView={{ width: '100%' }} viewport={{ once: true }} transition={{ duration: 1.2, ease: 'easeOut' }}
@@ -115,7 +115,8 @@ export default function AboutPreview() {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   style={{ width: '5rem', height: '5rem', border: '1px solid var(--gold)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto', backdropFilter: 'blur(12px)', background: 'rgba(0,0,0,0.2)' }}
                 >
-                  <span className="font-display" style={{ fontSize: '1.875rem', fontStyle: 'italic', color: 'var(--gold)' }}>P</span>
+                  {/* <span className="font-display" style={{ fontSize: '1.875rem', fontStyle: 'italic', color: 'var(--gold)' }}>P</span> */}
+                  <span className="font-display" style={{ fontSize: '1.875rem', fontStyle: 'italic', color: 'var(--gold)' }}>GF</span>
                 </motion.div>
               </div>
             </div>

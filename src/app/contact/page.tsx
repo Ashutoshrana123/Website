@@ -37,9 +37,10 @@ export default function ContactPage() {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', marginBottom: '3rem' }}>
             {[
-              { label: 'Email', value: 'hello@prestigepr.in', icon: '✉' },
-              { label: 'Phone', value: '+91 98765 43210', icon: '☎' },
-              { label: 'Offices', value: 'Mumbai · Chennai · Delhi', icon: '◉' },
+              { label: 'Email', value: 'hello@goldenfocus.com', icon: '✉' },
+              { label: 'Phone', value: '+91 98204 58236, +91 98330 26707', icon: '☎' },
+              // { label: 'Offices', value: 'Mumbai · Chennai · Delhi', icon: '◉' },
+              { label: 'Offices', value: 'Mumbai', icon: '◉' },
               { label: 'Hours', value: 'Mon–Sat, 9am–7pm IST', icon: '◷' },
             ].map(c => (
               <div key={c.label} style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>

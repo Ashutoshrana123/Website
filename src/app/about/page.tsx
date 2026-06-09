@@ -3,10 +3,30 @@ import MarqueeSection from '@/components/MarqueeSection';
 import { motion } from 'framer-motion';
 
 const team = [
-  { name: 'Riya Mehta', role: 'Founder & CEO', bio: 'Ex-Bollywood publicist with 10+ years in celebrity management and media relations.', initial: 'R' },
-  { name: 'Aarav Bose', role: 'Head of Brand PR', bio: 'Former journalist turned brand strategist, specializing in corporate and fashion PR.', initial: 'A' },
-  { name: 'Divya Krishnan', role: 'Event Director', bio: 'Orchestrated 200+ premium events across India. Expert in logistics and media buzz.', initial: 'D' },
-  { name: 'Kabir Singh', role: 'Digital & AI Lead', bio: 'Blends data-driven strategy with AI post production to deliver next-gen campaigns.', initial: 'K' },
+  { 
+    name: 'Rahul Raj Singh', 
+    role: 'Founder & CEO', 
+    bio: 'Ex-Bollywood publicist with 12+ years of experience in celebrity management, media relations, and strategic brand positioning. Has worked with top Bollywood celebrities and successfully managed high-profile campaigns.', 
+    initial: 'R' 
+  },
+  { 
+    name: 'Saloni Singh', 
+    role: 'Co-Founder & Head of Brand PR', 
+    bio: 'Strategic brand communications expert specializing in corporate and fashion PR. Excels at brand reputation management, crisis communication, and building long-term media relationships.', 
+    initial: 'S'  // Changed from 'A' to 'S' for Saloni
+  },
+  { 
+    name: 'Huda Ali', 
+    role: 'Senior PR Manager', 
+    bio: 'Orchestrated 200+ successful events across India. Expert in event management, media buzz creation, celebrity coordination, and logistics. Known for delivering seamless high-profile experiences.', 
+    initial: 'H'  // Changed from 'D' to 'H' for Huda
+  },
+  { 
+    name: 'Sikander Siddiqui', 
+    role: 'Office Manager', 
+    bio: 'Operations expert ensuring smooth day-to-day functioning. Manages vendor relationships, team coordination, and administrative efficiency. Keeps the agency running like clockwork.', 
+    initial: 'S'  // Changed from 'K' to 'S' for Sikander
+  },
 ];
 
 const values = [
@@ -61,7 +81,7 @@ export default function AboutPage() {
             We are a modern PR agency focused on creating impactful stories, strong media presence, and long-term brand value. With expertise across entertainment, fashion, corporate, and digital industries, we help individuals and businesses gain the attention they deserve.
           </motion.p>
           <motion.p variants={itemVariants} className="font-body" style={{ fontSize: '1rem', lineHeight: 1.6, color: 'var(--white-dim)' }}>
-            Founded in 2020, Prestige PR has grown from a boutique agency into one of India&apos;s most trusted names in public relations and event management — with a network spanning Bollywood, fashion, tech, and corporate sectors.
+            Founded in 2020, Golden Focus has grown from a boutique agency into one of India&apos;s most trusted names in public relations and event management — with a network spanning Bollywood, fashion, tech, and corporate sectors.
           </motion.p>
         </div>
 

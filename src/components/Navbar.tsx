@@ -60,9 +60,9 @@ export default function Navbar() {
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <span className="font-heading" style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.75rem' }}>P</span>
+              <span className="font-heading" style={{ color: 'var(--gold)', fontWeight: 800, fontSize: '0.75rem' }}>GF</span>
             </div>
-            <span className="font-heading" style={{ color: '#F5F0E8', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Prestige PR</span>
+            <span className="font-heading" style={{ color: '#F5F0E8', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Golden Focus</span>
           </Link>
 
           {/* Desktop Links */}
@@ -135,7 +135,7 @@ export default function Navbar() {
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="font-heading" style={{ color: '#fff', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Prestige PR</span>
+              <span className="font-heading" style={{ color: '#fff', fontWeight: 700, fontSize: '0.875rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Golden Focus</span>
               <button onClick={closeMenu} className="font-heading" style={{ color: 'var(--gold)', fontSize: '1.5rem', cursor: 'none', background: 'transparent', border: 'none' }}>✕</button>
             </div>
             <motion.nav 
