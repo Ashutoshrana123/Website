@@ -55,6 +55,7 @@ export default function HeroSection() {
         <div style={{ width: '1px', height: '6rem', background: 'var(--gold)', opacity: 0.3 }} />
       </motion.div>
 
+
       {/* Content */}
       <motion.div 
         style={{ position: 'relative', zIndex: 10, maxWidth: '80rem', margin: '0 auto', padding: '0 1.5rem', width: '100%', y: yText, opacity: opacityText }}
