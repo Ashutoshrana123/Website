@@ -16,10 +16,11 @@ const team = [
     initial: 'S'  // Changed from 'A' to 'S' for Saloni
   },
   { 
-    name: 'Huda Ali', 
-    role: 'Senior PR Manager', 
-    bio: 'Orchestrated 200+ successful events across India. Expert in event management, media buzz creation, celebrity coordination, and logistics. Known for delivering seamless high-profile experiences.', 
-    initial: 'H'  // Changed from 'D' to 'H' for Huda
+    name: 'Saddam Ansari', 
+    role: 'Creative Director', 
+    bio: 'Orchestrated 200+ successful Project across India.Leads bold creative direction across brands and campaigns. Expert in visual storytelling, brand strategy, concept development, and creative team leadership. Known for turning ideas into distinctive, high-impact experiences.', 
+    initial: 'S'  // Changedzsxl
+    //   from 'D' to 'H' for Huda
   },
   { 
     name: 'Sikander Siddiqui', 
