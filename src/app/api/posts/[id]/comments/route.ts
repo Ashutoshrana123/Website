@@ -1,0 +1,5 @@
+import { readStore, writeStore } from '@/lib/posts-store';
+
+export const runtime = 'nodejs';
+export async function GET(_request: Request, context: RouteContext<'/api/posts/[id]/comments'>) { const { id } = await context.params; return Response.json({ comments: (await readStore()).comments[id] || [] }); }
+export async function POST(request: Request, context: RouteContext<'/api/posts/[id]/comments'>) { const { id } = await context.params; const body = await request.json().catch(() => null) as { text?: string } | null; const text = body?.text?.trim(); if (!text || text.length > 1000) return Response.json({ error: 'Comment must be between 1 and 1000 characters.' }, { status: 400 }); const store = await readStore(); if (!store.posts.some(item => item.id === id)) return Response.json({ error: 'Post not found.' }, { status: 404 }); store.comments[id] = [...(store.comments[id] || []), text]; const post = store.posts.find(item => item.id === id)!; post.comments += 1; await writeStore(store); return Response.json({ comment: text }, { status: 201 }); }

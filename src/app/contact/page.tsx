@@ -5,10 +5,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', service: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState('');
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.MouseEvent) => {
+  const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
-    setTimeout(() => setSent(true), 300);
+    setError(''); setSending(true);
+    try { const response = await fetch('/api/inquiries', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) }); const data = await response.json(); if (!response.ok) throw new Error(data.error); setSent(true); } catch (error) { setError(error instanceof Error ? error.message : 'Unable to send your message. Please try again.'); } finally { setSending(false); }
   };
 
   const services = ['Celebrity PR', 'Brand PR', 'Press Releases', 'Influencer Marketing', 'Event PR', 'Crisis Management'];
@@ -177,9 +180,10 @@ export default function ContactPage() {
                     className="btn-primary form-btn"
                     style={{ cursor: 'none', width: '100%', justifyContent: 'center', marginTop: '0.5rem', border: 'none' }}
                   >
-                    <span>Send Message</span>
+                    <span>{sending ? 'Sending…' : 'Send Message'}</span>
                     <span style={{ marginLeft: '0.5rem' }}>→</span>
                   </motion.button>
+                  {error && <p role="alert" style={{ color: 'var(--red)', fontSize: '.8rem' }}>{error}</p>}
                 </div>
               </motion.div>
             )}
