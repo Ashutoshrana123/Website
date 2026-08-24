@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
+import { apiUrl } from '@/lib/api-url';
 
 type Post = { id: string; name: string; role: string; time: string; text: string; image?: string; video?: string; likes: number; comments: number; mine?: boolean };
 type Upload = { src: string; type: 'image' | 'video' };
@@ -26,7 +27,7 @@ export default function PostsExperience() {
   const [loadedOlder, setLoadedOlder] = useState(false);
   const [notice, setNotice] = useState('');
 
-  useEffect(() => { fetch('/api/posts').then(response => response.ok ? response.json() : Promise.reject()).then(data => setPosts(data.posts)).catch(() => setNotice('Unable to refresh the feed. Showing the latest saved view.')); }, []);
+  useEffect(() => { fetch(apiUrl('/api/posts')).then(response => response.ok ? response.json() : Promise.reject()).then(data => setPosts(data.posts)).catch(() => setNotice('Unable to refresh the feed. Showing the latest saved view.')); }, []);
 
   const visiblePosts = useMemo(() => loadedOlder ? posts : posts.slice(0, 3), [posts, loadedOlder]);
   const closeModal = () => { setModal(null); setDraft(''); setUploads([]); };
@@ -39,9 +40,9 @@ export default function PostsExperience() {
   };
   const publish = async () => {
     if (!draft.trim() && !uploads.length) { setNotice('Write a note or add an image before publishing.'); return; }
-    try { const response = await fetch('/api/posts', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: draft, media: uploads }) }); const data = await response.json(); if (!response.ok) throw new Error(data.error); setPosts(current => [data.post, ...current]); closeModal(); setNotice('Your post is now live.'); } catch (error) { setNotice(error instanceof Error ? error.message : 'Unable to publish this post. Please try again.'); }
+    try { const response = await fetch(apiUrl('/api/posts'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: draft, media: uploads }) }); const data = await response.json(); if (!response.ok) throw new Error(data.error); setPosts(current => [data.post, ...current]); closeModal(); setNotice('Your post is now live.'); } catch (error) { setNotice(error instanceof Error ? error.message : 'Unable to publish this post. Please try again.'); }
   };
-  const toggleLike = async (id: string) => { const active = liked.includes(id); setLiked(current => active ? current.filter(item => item !== id) : [...current, id]); const response = await fetch(`/api/posts/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: active ? 'unlike' : 'like' }) }); if (!response.ok) { setLiked(current => active ? [...current, id] : current.filter(item => item !== id)); setNotice('Unable to update the reaction. Please try again.'); } };
+  const toggleLike = async (id: string) => { const active = liked.includes(id); setLiked(current => active ? current.filter(item => item !== id) : [...current, id]); const response = await fetch(apiUrl(`/api/posts/${id}`), { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: active ? 'unlike' : 'like' }) }); if (!response.ok) { setLiked(current => active ? [...current, id] : current.filter(item => item !== id)); setNotice('Unable to update the reaction. Please try again.'); } };
 
   return <div style={{ minHeight: '100vh', padding: '9rem 1.5rem 7rem', maxWidth: '76rem', margin: '0 auto' }}>
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: .6 }} style={{ display: 'flex', alignItems: 'end', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap', marginBottom: '4rem' }}>

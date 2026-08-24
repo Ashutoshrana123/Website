@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { apiUrl } from '@/lib/api-url';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', service: '', message: '' });
@@ -11,7 +12,7 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.MouseEvent) => {
     e.preventDefault();
     setError(''); setSending(true);
-    try { const response = await fetch('/api/inquiries', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) }); const data = await response.json(); if (!response.ok) throw new Error(data.error); setSent(true); } catch (error) { setError(error instanceof Error ? error.message : 'Unable to send your message. Please try again.'); } finally { setSending(false); }
+    try { const response = await fetch(apiUrl('/api/inquiries'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) }); const data = await response.json(); if (!response.ok) throw new Error(data.error); setSent(true); } catch (error) { setError(error instanceof Error ? error.message : 'Unable to send your message. Please try again.'); } finally { setSending(false); }
   };
 
   const services = ['Celebrity PR', 'Brand PR', 'Press Releases', 'Influencer Marketing', 'Event PR', 'Crisis Management'];
