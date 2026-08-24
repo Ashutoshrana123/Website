@@ -1,10 +1,12 @@
 import { readStore, type StoredPost, writeStore } from '@/lib/posts-store';
+import { isAdmin } from '@/lib/admin-auth';
 
 export const runtime = 'nodejs';
 
 export async function GET() { const store = await readStore(); return Response.json({ posts: store.posts }); }
 
 export async function POST(request: Request) {
+  if (!await isAdmin()) return Response.json({ error: 'Administrator access is required.' }, { status: 401 });
   const body = await request.json().catch(() => null) as { text?: string; media?: { src: string; type: 'image' | 'video' }[] } | null;
   const text = body?.text?.trim() || '';
   const media = body?.media || [];

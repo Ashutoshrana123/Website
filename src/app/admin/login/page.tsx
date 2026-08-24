@@ -1,0 +1,11 @@
+'use client';
+
+import { FormEvent, useState } from 'react';
+
+export default function AdminLoginPage() {
+  const [id, setId] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState(''); const [loading, setLoading] = useState(false);
+  const submit = async (event: FormEvent) => { event.preventDefault(); setLoading(true); setError(''); const response = await fetch('/api/admin/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id, password }) }); if (response.ok) window.location.assign('/admin'); else { const data = await response.json(); setError(data.error || 'Unable to sign in.'); setLoading(false); } };
+  return <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: '2rem' }}><form onSubmit={submit} style={{ width: 'min(26rem, 100%)', padding: '2rem', border: '1px solid var(--border)', background: 'var(--surface)' }}><span className="font-heading" style={{ color: 'var(--gold)', fontSize: '.7rem', letterSpacing: '.2em', textTransform: 'uppercase' }}>Golden Focus</span><h1 className="font-display" style={{ color: 'var(--white)', fontSize: '2.6rem', margin: '.7rem 0 1.8rem' }}>Admin access</h1><label style={label}>Administrator ID<input value={id} onChange={event => setId(event.target.value)} autoComplete="username" style={input} required /></label><label style={label}>Password<input value={password} onChange={event => setPassword(event.target.value)} type="password" autoComplete="current-password" style={input} required /></label>{error && <p role="alert" style={{ color: 'var(--red)', fontSize: '.85rem', marginBottom: '1rem' }}>{error}</p>}<button className="btn-primary" disabled={loading} style={{ width: '100%', justifyContent: 'center' }}><span>{loading ? 'Signing in…' : 'Sign in'}</span></button></form></main>;
+}
+const label = { display: 'grid', gap: '.5rem', color: 'var(--gold)', fontFamily: 'var(--font-heading)', fontSize: '.68rem', letterSpacing: '.12em', textTransform: 'uppercase' as const, marginBottom: '1.2rem' };
+const input = { width: '100%', background: 'var(--bg)', border: '1px solid var(--border)', color: 'var(--white)', padding: '.85rem', font: '1rem var(--font-body)' };

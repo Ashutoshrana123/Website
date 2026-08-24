@@ -17,7 +17,7 @@ const seedPosts: Post[] = [
 
 const avatar = (name: string) => name.split(' ').map(part => part[0]).join('').slice(0, 2);
 
-export default function PostsExperience() {
+export default function PostsExperience({ adminMode = false }: { adminMode?: boolean }) {
   const [posts, setPosts] = useState(seedPosts);
   const [modal, setModal] = useState<'create' | 'share' | null>(null);
   const [draft, setDraft] = useState('');
@@ -51,7 +51,7 @@ export default function PostsExperience() {
         <h1 className="font-display" style={{ color: 'var(--white)', fontSize: 'clamp(3.8rem, 7vw, 6.5rem)', lineHeight: .88 }}>Stories, in<br /><i className="text-gold-gradient">focus.</i></h1>
         <p style={{ color: 'var(--white-dim)', marginTop: '1.25rem', maxWidth: '30rem', lineHeight: 1.7 }}>Notes from the people, campaigns, and moments that make the work matter.</p>
       </div>
-      <button className="btn-primary" onClick={() => setModal('create')}><span>+ Create post</span></button>
+      {adminMode && <button className="btn-primary" onClick={() => setModal('create')}><span>+ Create post</span></button>}
     </motion.div>
 
     <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 46rem) 1fr', gap: '5rem', alignItems: 'start' }} className="posts-layout">
