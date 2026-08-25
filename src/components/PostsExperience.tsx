@@ -221,10 +221,13 @@ function CreateModal({ draft, uploads, setDraft, onFiles, onRemove, onClose, onP
 
 function ShareModal({ post, onClose, onShared }: { post: { id: string; text: string }; onClose: () => void; onShared: () => void }) {
   const canonicalUrl = `https://pr-agency-alpha.vercel.app/posts/${post.id}`;
-  const url = `${canonicalUrl}?share=${Date.now()}`;
-  const message = post.text.replace(/\s+/g, ' ').trim().slice(0, 120);
+  const url = canonicalUrl;
+  const postText = post.text.replace(/\s+/g, ' ').trim();
+  const heading = postText.slice(0, 120);
+  const excerpt = postText.split(' ').slice(0, 120).join(' ');
+  const shareText = `${heading}\n\n${excerpt}\n\n${url}`;
   const copy = async () => { await navigator.clipboard.writeText(canonicalUrl); onShared(); };
-  const openWhatsApp = () => window.open(`https://wa.me/?text=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
-  const openEmail = () => window.location.href = `mailto:?subject=${encodeURIComponent(message)}&body=${encodeURIComponent(`${message}\n\n${url}`)}`;
+  const openWhatsApp = () => window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank', 'noopener,noreferrer');
+  const openEmail = () => window.location.href = `mailto:?subject=${encodeURIComponent(heading)}&body=${encodeURIComponent(shareText)}`;
   return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={overlay}><motion.div onClick={event => event.stopPropagation()} initial={{ y: 24 }} animate={{ y: 0 }} exit={{ y: 24 }} style={{ width: 'min(29rem, 100%)', background: 'var(--bg-2)', border: '1px solid var(--border)', padding: '2rem', cursor: 'default' }}><span className="font-display" style={{ color: 'var(--white)', fontSize: '2rem' }}>Share this story</span><p style={{ color: 'var(--white-dim)', fontSize: '.85rem', lineHeight: 1.6, margin: '1rem 0 1.5rem' }}>Share this post on WhatsApp, by email, or copy its public link.</p><div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '.6rem' }}><button className="btn-outline" onClick={openWhatsApp} style={{ padding: '.85rem .5rem', justifyContent: 'center' }}>WhatsApp</button><button className="btn-outline" onClick={openEmail} style={{ padding: '.85rem .5rem', justifyContent: 'center' }}>Email</button><button className="btn-outline" onClick={copy} style={{ padding: '.85rem .5rem', justifyContent: 'center' }}>Copy link</button></div><button onClick={onClose} style={{ ...actionStyle(false), marginTop: '1.5rem' }}>Cancel</button></motion.div></motion.div>;
 }
