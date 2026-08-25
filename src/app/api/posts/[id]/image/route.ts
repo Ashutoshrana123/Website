@@ -1,0 +1,3 @@
+import { readStore } from '@/lib/posts-store';
+export const runtime = 'nodejs';
+export async function GET(_request: Request, context: RouteContext<'/api/posts/[id]/image'>) { const { id } = await context.params; const image = (await readStore()).posts.find(item => item.id === id)?.image; if (!image) return new Response(null, { status: 404 }); if (!image.startsWith('data:')) return Response.redirect(image, 302); const [header, base64] = image.split(','); const mime = header.match(/^data:([^;]+);base64$/)?.[1] || 'image/jpeg'; return new Response(Buffer.from(base64, 'base64'), { headers: { 'Content-Type': mime } }); }
