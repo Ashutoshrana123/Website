@@ -23,6 +23,7 @@ export default function PostsExperience({ adminMode = false }: { adminMode?: boo
   const [draft, setDraft] = useState('');
   const [uploads, setUploads] = useState<Upload[]>([]);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [sharePostId, setSharePostId] = useState<string | null>(null);
   const [liked, setLiked] = useState<string[]>([]);
   const [loadedOlder, setLoadedOlder] = useState(false);
   const [notice, setNotice] = useState('');
@@ -58,7 +59,7 @@ export default function PostsExperience({ adminMode = false }: { adminMode?: boo
       <section>
         <div style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--border)', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between' }}><span className="font-heading" style={eyebrow}>Latest notes</span><span style={{ color: 'var(--white-dim)', fontSize: '.75rem' }}>{posts.length} entries</span></div>
         {notice && <div role="status" style={{ padding: '1rem', marginBottom: '1.5rem', background: 'var(--gold-dim)', color: 'var(--gold-light)', fontSize: '.85rem' }}>{notice}</div>}
-        <div style={{ display: 'grid', gap: '1.5rem' }}>{visiblePosts.map((post, index) => <PostCard key={post.id} post={post} index={index} liked={liked.includes(post.id)} onLike={() => toggleLike(post.id)} onShare={() => setModal('share')} onImage={() => post.image && setSelectedImage(post.image)} />)}</div>
+        <div style={{ display: 'grid', gap: '1.5rem' }}>{visiblePosts.map((post, index) => <PostCard key={post.id} post={post} index={index} liked={liked.includes(post.id)} onLike={() => toggleLike(post.id)} onShare={() => setSharePostId(post.id)} onImage={() => post.image && setSelectedImage(post.image)} />)}</div>
         {!loadedOlder && <button className="btn-outline" onClick={() => setLoadedOlder(true)} style={{ marginTop: '2rem' }}>Load older posts <span>↓</span></button>}
       </section>
       <aside className="posts-aside" style={{ borderLeft: '1px solid var(--border)', paddingLeft: '2rem' }}>
@@ -69,7 +70,7 @@ export default function PostsExperience({ adminMode = false }: { adminMode?: boo
     </div>
 
     <AnimatePresence>{modal === 'create' && <CreateModal draft={draft} uploads={uploads} setDraft={setDraft} onFiles={handleFiles} onRemove={(i) => setUploads(current => current.filter((_, index) => index !== i))} onClose={closeModal} onPublish={publish} />}</AnimatePresence>
-    <AnimatePresence>{modal === 'share' && <ShareModal onClose={() => setModal(null)} onShare={() => { setModal(null); setNotice('Post link copied — ready to share.'); }} />}</AnimatePresence>
+    <AnimatePresence>{sharePostId && <ShareModal postId={sharePostId} onClose={() => setSharePostId(null)} onShared={() => { setSharePostId(null); setNotice('Post link copied — ready to share.'); }} />}</AnimatePresence>
     <AnimatePresence>{selectedImage && <motion.div onClick={() => setSelectedImage(null)} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={overlay}><img src={selectedImage} alt="Expanded post media" style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain' }} /></motion.div>}</AnimatePresence>
     <style jsx global>{`.posts-layout{grid-template-columns:minmax(0,46rem) 1fr}@media(max-width:800px){.posts-layout{grid-template-columns:1fr!important;gap:3rem!important}.posts-aside{border-left:0!important;border-top:1px solid var(--border)!important;padding:2rem 0 0!important}}`}</style>
   </div>;
@@ -95,4 +96,11 @@ function CreateModal({ draft, uploads, setDraft, onFiles, onRemove, onClose, onP
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', marginTop: '1.5rem', flexWrap: 'wrap' }}><label className="btn-outline" style={{ padding: '.7rem 1rem', cursor: 'pointer' }}>Add media <input onChange={onFiles} type="file" accept="image/*,video/*" multiple hidden /></label><div style={{ display: 'flex', gap: '.75rem' }}><button className="btn-outline" onClick={onClose} style={{ padding: '.7rem 1rem' }}>Cancel</button><button className="btn-primary" onClick={onPublish} style={{ padding: '.75rem 1.1rem' }}><span>Publish</span></button></div></div></motion.div></motion.div>;
 }
 
-function ShareModal({ onClose, onShare }: { onClose: () => void; onShare: () => void }) { return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={overlay}><motion.div initial={{ y: 24 }} animate={{ y: 0 }} exit={{ y: 24 }} style={{ width: 'min(27rem, 100%)', background: 'var(--bg-2)', border: '1px solid var(--border)', padding: '2rem', cursor: 'default' }}><span className="font-display" style={{ color: 'var(--white)', fontSize: '2rem' }}>Share this story</span><p style={{ color: 'var(--white-dim)', fontSize: '.85rem', lineHeight: 1.6, margin: '1rem 0 1.5rem' }}>Copy a direct link to send this note to someone.</p><div style={{ display: 'flex', justifyContent: 'end', gap: '.75rem' }}><button className="btn-outline" onClick={onClose} style={{ padding: '.7rem 1rem' }}>Cancel</button><button className="btn-primary" onClick={onShare} style={{ padding: '.75rem 1rem' }}><span>Copy link</span></button></div></motion.div></motion.div> }
+function ShareModal({ postId, onClose, onShared }: { postId: string; onClose: () => void; onShared: () => void }) {
+  const url = typeof window === 'undefined' ? '' : `${window.location.origin}/posts/${postId}`;
+  const message = 'A story from Golden Focus';
+  const copy = async () => { await navigator.clipboard.writeText(url); onShared(); };
+  const openWhatsApp = () => window.open(`https://wa.me/?text=${encodeURIComponent(`${message}\n${url}`)}`, '_blank', 'noopener,noreferrer');
+  const openEmail = () => window.location.href = `mailto:?subject=${encodeURIComponent(message)}&body=${encodeURIComponent(`${message}\n\n${url}`)}`;
+  return <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} style={overlay}><motion.div onClick={event => event.stopPropagation()} initial={{ y: 24 }} animate={{ y: 0 }} exit={{ y: 24 }} style={{ width: 'min(29rem, 100%)', background: 'var(--bg-2)', border: '1px solid var(--border)', padding: '2rem', cursor: 'default' }}><span className="font-display" style={{ color: 'var(--white)', fontSize: '2rem' }}>Share this story</span><p style={{ color: 'var(--white-dim)', fontSize: '.85rem', lineHeight: 1.6, margin: '1rem 0 1.5rem' }}>Send the public post link through your preferred app.</p><div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '.6rem' }}><button className="btn-outline" onClick={openWhatsApp} style={{ padding: '.85rem .5rem', justifyContent: 'center' }}>WhatsApp</button><button className="btn-outline" onClick={openEmail} style={{ padding: '.85rem .5rem', justifyContent: 'center' }}>Email</button><button className="btn-outline" onClick={copy} style={{ padding: '.85rem .5rem', justifyContent: 'center' }}>Copy link</button></div><button onClick={onClose} style={{ ...actionStyle(false), marginTop: '1.5rem' }}>Cancel</button></motion.div></motion.div>;
+}
