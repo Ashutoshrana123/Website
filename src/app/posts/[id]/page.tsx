@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     const title = post.text.replace(/\s+/g, ' ').trim().slice(0, 120);
     const description = post.text.replace(/\s+/g, ' ').trim().slice(0, 200);
     const origin = 'https://pr-agency-alpha.vercel.app';
-    return { title, description, openGraph: { title, description, type: 'article', url: `${origin}/posts/${id}`, images: post.image ? [{ url: `${origin}/api/posts/${id}/image` }] : [] }, twitter: { card: post.image ? 'summary_large_image' : 'summary', title, description, images: post.image ? [`${origin}/api/posts/${id}/image`] : [] } };
+    return { title, description, openGraph: { title, description, siteName: title, type: 'article', url: `${origin}/posts/${id}`, images: post.image ? [{ url: `${origin}/api/posts/${id}/image` }] : [] }, twitter: { card: post.image ? 'summary_large_image' : 'summary', title, description, images: post.image ? [`${origin}/api/posts/${id}/image`] : [] } };
   } catch { return { title: 'Post' }; }
 }
 
