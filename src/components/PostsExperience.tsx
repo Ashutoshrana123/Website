@@ -225,7 +225,7 @@ function ShareModal({ post, onClose, onShared }: { post: { id: string; text: str
   const postText = post.text.replace(/\s+/g, ' ').trim();
   const heading = postText.slice(0, 120);
   const excerpt = postText.split(' ').slice(0, 120).join(' ');
-  const createShareText = (link: string) => `${heading}\n\n${excerpt}\n\n${link}`;
+  const createShareText = (link: string) => `News-Bharat\n\n${heading}\n\n${excerpt}\n\n${link}`;
   const shareText = createShareText(url);
   const copy = async () => {
     const previewUrl = `${canonicalUrl}?share=${Date.now()}`;

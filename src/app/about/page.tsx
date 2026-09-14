@@ -16,13 +16,6 @@ const team = [
     initial: 'S'  // Changed from 'A' to 'S' for Saloni
   },
   { 
-    name: 'Saddam Ansari', 
-    role: 'Creative Director', 
-    bio: 'Orchestrated 200+ successful Project across India.Leads bold creative direction across brands and campaigns. Expert in visual storytelling, brand strategy, concept development, and creative team leadership. Known for turning ideas into distinctive, high-impact experiences.', 
-    initial: 'S'  // Changedzsxl
-    //   from 'D' to 'H' for Huda
-  },
-  { 
     name: 'Sikander Siddiqui', 
     role: 'Office Manager', 
     bio: 'Operations expert ensuring smooth day-to-day functioning. Manages vendor relationships, team coordination, and administrative efficiency. Keeps the agency running like clockwork.', 
