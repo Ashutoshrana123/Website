@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import ManagedContentGrid from '@/components/ManagedContentGrid';
 
 const services = [
   {
@@ -136,6 +137,7 @@ export default function ServicesPage() {
         ))}
       </div>
 
+      <ManagedContentGrid type="service" title="Latest services" />
       {/* CTA */}
       <div style={{ padding: '5rem 1.5rem', textAlign: 'center', background: 'var(--bg-2)', borderTop: '1px solid var(--border)' }}>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.8 }}>

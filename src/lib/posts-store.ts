@@ -1,7 +1,9 @@
 import { MongoClient } from 'mongodb';
 
 export type StoredPost = { id: string; name: string; role: string; time: string; text: string; image?: string; video?: string; likes: number; comments: number; mine?: boolean };
-type Store = { posts: StoredPost[]; comments: Record<string, string[]> };
+export type ManagedContentType = 'service' | 'work' | 'media';
+export type ManagedContent = { id: string; type: ManagedContentType; title: string; description: string; category?: string; image?: string; createdAt: string };
+type Store = { posts: StoredPost[]; comments: Record<string, string[]>; content: ManagedContent[] };
 
 const starterPosts: StoredPost[] = [
   { id: 'summer-campaign', name: 'Mira Kapoor', role: 'Creative Director', time: '2 hours ago', text: 'The best campaigns begin with a feeling, not a brief. A quiet look behind the visual language for our summer story.', image: 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85', likes: 124, comments: 18 },
@@ -30,8 +32,8 @@ export async function saveInquiry(inquiry: Inquiry) {
 export async function readStore(): Promise<Store> {
   const states = await collection();
   const existing = await states.findOne({ _id: 'posts' });
-  if (existing) return { posts: existing.posts, comments: existing.comments || {} };
-  const store = { posts: starterPosts, comments: {} };
+  if (existing) return { posts: existing.posts, comments: existing.comments || {}, content: existing.content || [] };
+  const store = { posts: starterPosts, comments: {}, content: [] };
   await states.insertOne({ _id: 'posts', ...store });
   return store;
 }

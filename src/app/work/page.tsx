@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import ManagedContentGrid from '@/components/ManagedContentGrid';
 
 const works = [
   {
@@ -133,6 +134,7 @@ export default function WorkPage() {
         ))}
       </div>
 
+      <ManagedContentGrid type="work" title="Latest work" />
       {/* Trusted by */}
       <div style={{ padding: '5rem 1.5rem', background: 'var(--bg-2)', borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto', textAlign: 'center' }}>

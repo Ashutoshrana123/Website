@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ManagedContentGrid from '@/components/ManagedContentGrid';
 
 const categories = ['All', 'Celebrity PR', 'Brand PR', 'Event PR', 'AI Post Production'];
 
@@ -116,6 +117,7 @@ export default function MediaPage() {
         </AnimatePresence>
       </motion.div>
 
+      <ManagedContentGrid type="media" title="Latest uploads" />
       {/* Press Coverage */}
       <div style={{ padding: '6rem 1.5rem', background: 'var(--bg-2)', borderTop: '1px solid var(--border)' }}>
         <div style={{ maxWidth: '80rem', margin: '0 auto' }}>
