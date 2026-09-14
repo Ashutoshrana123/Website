@@ -36,7 +36,8 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
     const description = post.text.replace(/\s+/g, ' ').trim().slice(0, 200);
     const origin = 'https://news-bharat-india.vercel.app';
     const url = `${origin}/posts/${id}${share ? `?share=${encodeURIComponent(share)}` : ''}`;
-    return { title, description, openGraph: { title, description, siteName: 'News-Bharat', type: 'article', url, images: post.image ? [{ url: `${origin}/api/posts/${id}/image` }] : [] }, twitter: { card: post.image ? 'summary_large_image' : 'summary', title, description, images: post.image ? [`${origin}/api/posts/${id}/image`] : [] } };
+    const shareImage = post.image ? `${origin}/api/posts/${id}/image` : `${origin}/logo.jpg`;
+    return { title, description, openGraph: { title, description, siteName: 'News-Bharat', type: 'article', url, images: [{ url: shareImage }] }, twitter: { card: 'summary_large_image', title, description, images: [shareImage] } };
   } catch { return { title: 'Post' }; }
 }
 
