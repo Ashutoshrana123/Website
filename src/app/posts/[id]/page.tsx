@@ -36,7 +36,7 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
     const description = post.text.replace(/\s+/g, ' ').trim().slice(0, 200);
     const origin = 'https://pr-agency-alpha.vercel.app';
     const url = `${origin}/posts/${id}${share ? `?share=${encodeURIComponent(share)}` : ''}`;
-    const shareImage = post.image ? `${origin}/api/posts/${id}/image` : `${origin}/logo.jpg`;
+    const shareImage = post.image ? (post.image.startsWith('data:') ? `${origin}/api/posts/${id}/image` : post.image) : `${origin}/logo.jpg`;
     return { title, description, openGraph: { title, description, siteName: 'News-Bharat', type: 'article', url, images: [{ url: shareImage }] }, twitter: { card: 'summary_large_image', title, description, images: [shareImage] } };
   } catch { return { title: 'Post' }; }
 }
