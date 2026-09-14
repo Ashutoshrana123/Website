@@ -220,7 +220,7 @@ function CreateModal({ draft, uploads, setDraft, onFiles, onRemove, onClose, onP
 }
 
 function ShareModal({ post, onClose, onShared }: { post: { id: string; text: string }; onClose: () => void; onShared: () => void }) {
-  const canonicalUrl = `https://pr-agency-alpha.vercel.app/posts/${post.id}`;
+  const canonicalUrl = `https://news-bharat-india.vercel.app/posts/${post.id}`;
   const url = canonicalUrl;
   const postText = post.text.replace(/\s+/g, ' ').trim();
   const heading = postText.slice(0, 120);
